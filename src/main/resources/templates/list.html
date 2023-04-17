@@ -20,7 +20,7 @@
         <li><a href="http://localhost:8080/salariés?page=0&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC" class="nav-link">Liste des salariés <span class="badge badge-primary"></span></a></li>
       </ul>
 
-      <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/salariés" method="GET">
+      <form class="form-inline my-2 my-lg-0" role="search" th:action="@{http://localhost:8080/salaries/recherche}" method="GET">
         <div class="form-group">
           <input name="nom" class="form-control" placeholder="Rechercher un nom" type="text">
         </div>
@@ -46,16 +46,11 @@
           <th scope="col"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Jeanne Dupond</td>
-          <td><a href="/salaries/aide/2" class="btn btn-primary ember-view">Détail</a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Robert Martin</td>
-          <td><a href="/salaries/aide/3" class="btn btn-primary ember-view">Détail</a></td>
+        <tbody th:each="salarie: ${salaries}">
+        <tr >
+          <th th:text="${salarie.id}" scope="row">1</th>
+          <td th:text="${salarie.nom}">Jeanne Dupond</td>
+          <td><a th:href="@{/salaries(salarie=${salarie})}" href="/salaries/aide/2" class="btn btn-primary ember-view">Détail</a></td>
         </tr>
         </tbody>
       </table>
